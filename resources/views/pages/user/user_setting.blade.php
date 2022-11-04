@@ -1,9 +1,9 @@
-@extends('admin_layout')
-@section('admin_content')
+@extends('layout')
+@section('content')
     <div class="table-agile-info">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Liệt kê thương hiệu sản phẩm
+                Liệt kê đơn hàng
             </div>
             <div class="row w3-res-tb">
                 <div class="col-sm-5 m-b-xs">
@@ -21,17 +21,17 @@
                     <div class="input-group">
                         <input type="text" class="input-sm form-control" placeholder="Search">
                         <span class="input-group-btn">
-                            <button class="btn btn-sm btn-default" type="button">Go!</button>
-                        </span>
+<button class="btn btn-sm btn-default" type="button">Go!</button>
+</span>
                     </div>
                 </div>
             </div>
             <div class="table-responsive">
                 <?php
                 $message = Session::get('message');
-                if ($message) {
-                    echo '<span class="text-alert">' . $message . '</span>';
-                    Session::put('message', null);
+                if($message){
+                    echo '<span class="text-alert">'.$message.'</span>';
+                    Session::put('message',null);
                 }
                 ?>
                 <table class="table table-striped b-t b-light">
@@ -42,40 +42,43 @@
                                 <input type="checkbox"><i></i>
                             </label>
                         </th>
-                        <th>Tên thương hiệu</th>
-                        <th>Brand Slug</th>
+                        <th>Tên người đặt</th>
+                        <th>Tổng giá tiền</th>
+                        <th>Tình trạng</th>
                         <th>Hiển thị</th>
                         <th style="width:30px;"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($all_brand_product as $key => $brand_pro)
+                    @foreach($all_order as $key => $order)
                         <tr>
                             <td><label class="i-checks m-b-none"><input type="checkbox"
                                                                         name="post[]"><i></i></label></td>
-                            <td>{{ $brand_pro->brand_name }}</td>
-                            <td>{{ $brand_pro->brand_slug }}</td>
-                            <td><span class="text-ellipsis">
-                                <?php if($brand_pro->brand_status == 0){?>
-                                        <a href="{{URL::to('/unactive-brand-product/'.$brand_pro->brand_id)}}">
-                                            <span class="fa-thumb-styling fa fa-thumbs-up"></span>
-                                        </a>
-                                <?php }else{?>
-                                        <a href="{{URL::to('/active-brand-product/'.$brand_pro->brand_id)}}">
-                                            <span class="fa-thumb-styling fa fa-thumbs-down"></span>
-                                        </a>
-                                <?php }?>
-                                </span>
+                            <td>{{ $order->customer_name }}</td>
+                            <td>{{ $order->order_total }}</td>
+                            <td>
+                                <?php
+                                if($order->order_status==1) {
+                                    echo 'Chưa xử lý';
+                                }
+                                else if ($order->order_status==2){
+                                    echo 'Đã xử lý';
+                                }
+                                else {
+                                    echo 'Hủy đơn hàng-tạm giữ';
+                                }
+                                ?>
                             </td>
                             <td>
-                                <a href="{{URL::to('/edit-brand-product/'.$brand_pro->brand_id)}}"
+                                <a href="{{URL::to('/view-order-user/'.$order->order_id)}}"
                                    class="active styling-edit" ui-toggle-class="">
-                                    <i class="fa fa-pencil-square-o text-success text-active"></i></a>
-                                <a onclick="return confirm('Bạn có chắc là muốn xóa danh mục này ko?')"
-                                   href="{{URL::to('/delete-brand-product/'.$brand_pro->brand_id)}}" class="active styling-edit" ui-toggle-class="">
+                                    <i class="fa fa-pencil-square-o text-success text-active"></i> xem chi
+                                    tiết</a>
+                                <a onclick="return confirm('Bạn có chắc là muốn hủy đơn hàng không?')"
+                                   href="{{URL::to('/delete-order/'.$order->order_id)}}" class="active styling-edit"
+                                   ui-toggle-class="">
                                     <i class="fa fa-times text-danger text"></i>
                                 </a>
-
                             </td>
                         </tr>
                     @endforeach

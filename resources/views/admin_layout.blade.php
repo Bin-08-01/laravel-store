@@ -117,7 +117,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="{{URL::to('/all-brand-product')}}">Liệt kê thương hiệu sản phẩm</a></li>
                         </ul>
                     </li>
-
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-book"></i>
+                            <span>Sản phẩm</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{URL::to('/add-product')}}">Thêm sản phẩm</a></li>
+                            <li><a href="{{URL::to('/all-product')}}">Liệt kê sản phẩm</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-book"></i>
+                            <span>Đơn hàng</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{URL::to('/manage-order')}}">Quản lý đơn hàng</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="login.html">
                             <i class="fa fa-user"></i>
@@ -144,6 +162,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="{{asset('public/backend/js/jquery.nicescroll.js')}}"></script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{asset('public/backend/js/flot-chart/excanvas.min.js')}}"></script><![endif]-->
     <script src="{{asset('public/backend/js/jquery.scrollTo.js')}}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.0/classic/ckeditor.js"></script>
     <!-- morris JavaScript -->
     <script>
         $(document).ready(function () {
@@ -230,6 +249,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             }
 
         });
+    </script>
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace('ckeditor');
+        CKEDITOR.replace('ckeditor1');
+        CKEDITOR.replace('ckeditor2');
+        CKEDITOR.replace('ckeditor3');
+        CKEDITOR.replace('id4');
     </script>
     <!-- //calendar -->
 </section>
